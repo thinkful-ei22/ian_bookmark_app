@@ -15,10 +15,10 @@ const store = (function(){
         return this.bookmarks.find(bookmark => bookmark.id === id);
         };
 
-    const findAndUpdate = function(id, newData){
-        let bookmark = this.findById(id)
-        let newbookmark = Object.assign(bookmark, newData);
-        item = newbookmark;
+    const findAndUpdate = function(id, newbookmark){
+        let bookmark = this.findById(id);
+        bookmark = newbookmark;
+        bookmark.showDetail = false;
     }
 
     const findAndDelete = function(id) {

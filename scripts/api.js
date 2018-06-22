@@ -7,7 +7,7 @@ const api = (function(){
         $.getJSON(BASE_URL, callback);
     };
 
-    const createBookmark = function(title, bmURL, description, rating, callback){
+    const createBookmark = function(title, bmURL, description, rating, callback, ecallback){
         let newData = JSON.stringify({ title: title, url: bmURL, desc: description,
         rating: rating});
         $.ajax({
@@ -15,17 +15,19 @@ const api = (function(){
             method: 'POST',
             contentType: 'application/json',
             data: newData,
-            success: callback
+            success: callback,
+            error: ecallback
         });
     };
 
-    const updateBookmark = function(id, updateData, callback){
+    const updateBookmark = function(id, updateData, callback, ecallback){
         $.ajax({
             url: `${BASE_URL}/${id}`,
             method: 'PATCH',
-            contentType: 'application',
+            contentType: 'application/json',
             data: JSON.stringify(updateData),
-            success: callback
+            success: callback,
+            error: ecallback
         });
     };
 
