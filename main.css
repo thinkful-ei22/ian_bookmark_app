@@ -2,8 +2,49 @@
     box-sizing: border-box;
   }
   
+  h1 {
+    text-align: center;
+  }
+  #title {
+      font-size: 80px;
+  }
+
+  header{
+      background-color: grey;
+      padding: 10px;
+      font-size: 50px;
+  }
+
+  #js-home-form {
+      text-align: center;
+  }
+
+  .js-bookmarks-list{
+      padding-top: 15px;
+      padding-bottom: 15px;
+  }
+  .form-check{
+    margin: 5px;
+  }
+
+  .js-adding{
+      margin-bottom: 15px;
+      margin-top: 25px;
+
+  }
+
+  .rating {
+      font-size: 20px;
+  }
+
+  .li-description {
+      margin-bottom: 15px;
+  }
+
   body {
     font-family: 'Roboto', sans-serif;
+    margin-left: auto;
+    margin-right: auto;
   }
   
   button, input[type="text"] {
