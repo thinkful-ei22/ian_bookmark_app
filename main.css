@@ -2,6 +2,7 @@
     box-sizing: border-box;
   }
   
+
   h1 {
     text-align: center;
   }
@@ -13,6 +14,15 @@
       padding: 10px;
       font-size: 50px;
   }
+  footer {
+    position: fixed;
+    padding-top: 10px;
+    left: 0;
+    bottom: 0;
+    background-color: lightgray;
+    width: 100%;
+    text-align: center;
+}
 
   #js-home-form {
       text-align: center;
@@ -25,7 +35,7 @@
 
   .js-bookmarks-list{
       padding-top: 15px;
-      padding-bottom: 15px;
+      padding-bottom: 250px;
   }
   .form-check{
     margin: 5px;

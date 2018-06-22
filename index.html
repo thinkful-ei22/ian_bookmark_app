@@ -10,10 +10,10 @@
 </head>
 <div class="container">
   <body>
-    <header>
+    <header role="banner">
         <h1 id="header-title">Bookmarker</h1>
         <form id="js-home-form">
-          <button class ="btn btn-primary add-form btn-lg" type="button">Add a Bookmark</button>
+          <button class ="btn btn-primary add-form btn-lg" type="button" role="button">Add a Bookmark</button>
           <select class="selectpicker btn btn-primary btn-lg dropdown-toggle" id="dropdown">
               <option value="0"selected>Sort by Rating</option>
               <option value="1">At Least 1 Star</option>
@@ -25,7 +25,7 @@
                 
         </form>
     </header>
-    <main>
+    <main role="main">
       <div id="adding-section">
       </div>
       <div id="error-box-area">
@@ -42,5 +42,8 @@
       <script type="text/javascript" src="scripts/index.js"></script>
     </main>
   </body>
+  <footer role="contentinfo">
+    <p>created by Ian Beihl June 2018</p>
+  </footer>
 </div>
 </html>
