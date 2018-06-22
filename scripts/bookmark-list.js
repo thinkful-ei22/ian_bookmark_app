@@ -46,13 +46,14 @@ const bookmarkList = (function(){
     `;
 
     const generateBookmarkElement = function(bookmark){
+        
         if (bookmark.showDetail === false){
             let stars = [];
             for(let i = 1; i <= bookmark.rating; i++){
                 stars.push('<span class="glyphicon glyphicon-star" aria-hidden="true"></span>');
             }
             let starsJoined = stars.join("");
-            
+
             return `
             <li class="li-result list-group-item" data-item-id="${bookmark.id}">
             <h3>${bookmark.title}</h3>
@@ -62,6 +63,18 @@ const bookmarkList = (function(){
           `
         }
         else {
+
+            let radios = '';
+            for(let i = 1; i <= 5; i++){
+                const checked = bookmark.rating === i ? 'checked': '';
+                radios += `
+                <span class="form-check">
+                    <input ${checked} class="form-check-input" name="rating" type="radio" id="${i}star" value="${i}">
+                    <label class="form-check-label" for="rating">${i} Star *</label>
+                </span>
+                `
+            }
+
             return `
             <li class="li-result list-group-item" data-item-id="${bookmark.id}">
             <form class="js-edit-item">
@@ -69,9 +82,9 @@ const bookmarkList = (function(){
                     <label for="title">Title:</label>
                     <input class="bookmark-title form-control" id="title" type="text" value="${bookmark.title}" />
                 </div>
-                <div class="form-group">
-                    <label for="rating">Rating:</label>
-                    <input class="bookmark-rating form-control" id="rating" type="text" value="${bookmark.rating}" />
+                <div class="form-group radio-rating">
+                <label for="rating">Rating: </label>
+                ${radios}
                 </div>
                 <div class="form-group">
                     <label for="url">URL:</label>
@@ -166,12 +179,14 @@ const bookmarkList = (function(){
 
     const handleEditBookmarkSubmit = function(){
         $('.js-bookmarks-list').on('click','.edit', (event) => {
+            console.log($('.bookmark-title'));
             event.preventDefault();
             const id = getBookmarkIdFromElement(event.currentTarget);
             const newTitle = $('.bookmark-title').val();
             const newURL = $('.bookmark-url').val();
             const newDescription = $('.bookmark-description').val();
-            const newRating = $('.bookmark-rating').val();
+            const newRating = $('input[name=rating]:checked').val();
+            console.log(newRating);
             let newBookmark = { title: newTitle, url: newURL, desc: newDescription,
                 rating: newRating}
             api.updateBookmark(id, newBookmark, (() => {
@@ -182,7 +197,7 @@ const bookmarkList = (function(){
                     });
                 }),
                 () => {
-                    alert("must have a title and valid url!");
+                    alert("must have a title, valid url and rating from 1 to 5!");
                 }
             );
           });
