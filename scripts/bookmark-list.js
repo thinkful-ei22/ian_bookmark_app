@@ -13,7 +13,7 @@ const bookmarkList = (function(){
         <div class="form-group radio-rating">
         <label for="rating">Rating: </label>
         <span class="form-check">
-            <input class="form-check-input" name="rating" type="radio" id="1star" value="1">
+            <input checked class="form-check-input" name="rating" type="radio" id="1star" value="1">
             <label class="form-check-label" for="rating">1 Star *</label>
         </span>
         <span class="form-check">
@@ -119,10 +119,11 @@ const bookmarkList = (function(){
             api.createBookmark(newBookmarkTitle, newBookmarkURL,
                 newBookmarkDescription, newBookmarkRating, (newBookmark) => {
                     store.addBookmark(newBookmark);
+                    store.addingView = !store.addingView;
                     render();
                 },
                 () => {
-                    alert('must enter all field correctly!');
+                    alert('must enter a title and valid url!');
                 }
             )
         });
@@ -181,7 +182,7 @@ const bookmarkList = (function(){
                     });
                 }),
                 () => {
-                    alert("must enter all fields correctly!");
+                    alert("must have a title and valid url!");
                 }
             );
           });
