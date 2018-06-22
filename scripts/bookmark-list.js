@@ -51,13 +51,12 @@ const bookmarkList = (function(){
             for(let i = 1; i <= bookmark.rating; i++){
                 stars.push('<span class="glyphicon glyphicon-star" aria-hidden="true"></span>');
             }
-            stars.join("");
-            console.log(stars);
+            let starsJoined = stars.join("");
             
             return `
             <li class="li-result list-group-item" data-item-id="${bookmark.id}">
             <h3>${bookmark.title}</h3>
-            <h4>${stars}</h4>
+            <h4>${starsJoined}</h4>
             <button class="btn btn-primary js-li-result show-details">Show Details</button>
             </li>
           `
@@ -172,11 +171,12 @@ const bookmarkList = (function(){
             const newURL = $('.bookmark-url').val();
             const newDescription = $('.bookmark-description').val();
             const newRating = $('.bookmark-rating').val();
-            api.updateBookmark(id, { title: newTitle, url: newURL, desc: newDescription,
-                rating: newRating}, (() => {
+            let newBookmark = { title: newTitle, url: newURL, desc: newDescription,
+                rating: newRating}
+            api.updateBookmark(id, newBookmark, (() => {
                     api.getBookmarks((updatedBookmarks) => {
                         console.log(updatedBookmarks);
-                        //let item = store.findById(id);
+                        store.findAndUpdate(id, newBookmark);
                         //$('.bookmark-title').val(item.title);
                         //$('.bookmark-url').val(item.url);
                         //$('.bookmark-description').val(item.desc);

@@ -17,7 +17,17 @@ const store = (function(){
 
     const findAndUpdate = function(id, newbookmark){
         let bookmark = this.findById(id);
-        bookmark = newbookmark;
+        this.bookmarks = this.bookmarks.map(bookmark => {
+            if (bookmark.id === id){
+                return Object.assign(bookmark, newbookmark);
+            }
+            else{
+                return bookmark;
+            }
+        });
+        console.log(bookmark);
+        //bookmark = newbookmark;
+        console.log(bookmark, this.bookmarks);
         bookmark.showDetail = false;
     }
 
