@@ -3,12 +3,12 @@
 const store = (function(){
     const bookmarks = [];
     const addingView = false;
+    const filterByRating = 1;
 
 
     const addBookmark = function(bookmark) {
         bookmark.showDetail = false;
         this.bookmarks.push(bookmark);
-        console.log(this.bookmarks);
         };
 
     const findById = function(id) {
@@ -17,7 +17,6 @@ const store = (function(){
 
     const findAndUpdate = function(id, newData){
         let bookmark = this.findById(id)
-        console.log(bookmark);
         let newbookmark = Object.assign(bookmark, newData);
         item = newbookmark;
     }
@@ -32,7 +31,7 @@ const store = (function(){
     
     return {
         bookmarks, addingView, addBookmark, findById, findAndUpdate, findAndDelete,
-        toggleAddingView
+        toggleAddingView, filterByRating
     }
 
 }());

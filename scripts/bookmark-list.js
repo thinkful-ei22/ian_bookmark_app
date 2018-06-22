@@ -41,7 +41,7 @@ const bookmarkList = (function(){
         <label for="desc">Description</label>
         <textarea class="form-control" id="desc" placeholder="this is a great place to watch highlghts..." rows="3"></textarea>
         </div>
-        <button class="js-adding" type="submit">Add this Bookmark</button>
+        <button class="js-adding btn btn-primary" type="submit">Add this Bookmark</button>
         </form>
     `;
 
@@ -49,7 +49,8 @@ const bookmarkList = (function(){
         if (bookmark.showDetail === false){
             return `
             <li class="li-result list-group-item" data-item-id="${bookmark.id}">
-            <h3>${bookmark.title}  ${bookmark.rating}</h3>
+            <h3>${bookmark.title}</h3>
+            <h3>${bookmark.rating}</h3>
             <button class="btn btn-primary js-li-result show-details">Show Details</button>
             </li>
           `
@@ -57,12 +58,24 @@ const bookmarkList = (function(){
         else {
             return `
             <li class="li-result list-group-item" data-item-id="${bookmark.id}">
-                <h3>${bookmark.title}</h3>
-                <p class="rating">${bookmark.rating}</p>
-                <p class="li-description">${bookmark.desc}</p>
+            <form class="js-edit-item">
+                <div class="form-group">
+                    <label for="title">Title:</label>
+                    <input class="bookmark-title form-control" id="title" type="text" value="${bookmark.title}" />
+                </div>
+                <div class="form-group">
+                    <label for="rating">Rating:</label>
+                    <input class="bookmark-rating form-control" id="rating" type="text" value="${bookmark.rating}" />
+                </div>
+                <div class="form-group">
+                    <label for="desc">Description:</label>
+                <input class="bookmark-description form-control" id="desc" type="text" value="${bookmark.desc}" />
+                </div>
+                <button class="btn btn-primary" type="submit">Update Bookmark</button>
                 <a class="btn btn-primary js-li-result" href="${bookmark.url} role="button">Go to Website!</a>
                 <button class="btn btn-primary js-li-result show-details">Hide Details</button>
                 <button class="btn btn-primary js-li-result remove" type="remove">Remove Bookmark</button>
+            </form>
             </li>`
         }
     };
@@ -77,7 +90,6 @@ const bookmarkList = (function(){
         let bookmarks = store.bookmarks;
         const bookmarksString = generateBookmarksString(bookmarks);
         $('.js-bookmarks-list').html(bookmarksString);
-        console.log("render ran");
         if(store.addingView === true){
             $('#adding-section').html(addingFormElement);
         }
@@ -89,21 +101,14 @@ const bookmarkList = (function(){
             const newBookmarkTitle = $('#title-input').val();
             const newBookmarkURL = $('#url-input').val();
             const newBookmarkDescription = $('#desc').val();
-
             const newBookmarkRating = $("input[type='radio']:checked").val();
-            console.log(newBookmarkRating);
-
-            console.log(newBookmarkTitle);
-            console.log(newBookmarkURL);
-            console.log(newBookmarkDescription);
             $('#title-input').val('');
             $('#url-input').val('');
             $('#description').val('');
             $('.radio-rating').val('');
             api.createBookmark(newBookmarkTitle, newBookmarkURL,
-                newBookmarkDescription, 5, (newBookmark) => {
+                newBookmarkDescription, newBookmarkRating, (newBookmark) => {
                     store.addBookmark(newBookmark);
-                    console.log(store.bookmarks);
                     render();
                 });
         });
@@ -115,6 +120,7 @@ const bookmarkList = (function(){
 
     const handleDeleteBookmarkClicked = function(){
         $('.js-bookmarks-list').on('click', '.remove', (event) => {
+            event.preventDefault();
             let id = getBookmarkIdFromElement(event.currentTarget);
             api.deleteBookmark(id, () => {
                 store.findAndDelete(id);
@@ -124,16 +130,17 @@ const bookmarkList = (function(){
     };
 
     const handleAddBookmarkToggle = function(){
-        $('.add-form').click(() => {
+        $('.add-form').click((event) => {
+            event.preventDefault();
             store.addingView = !store.addingView;
             render();
-            console.log(store.addingView);
         });
         
     }
 
     const handleShowDetailToggle = function(){
         $('.list-group').on('click', '.show-details', (event) => {
+            event.preventDefault();
             let id = getBookmarkIdFromElement(event.currentTarget);
             let bookmark = store.findById(id);
             bookmark.showDetail = !bookmark.showDetail;
@@ -141,9 +148,19 @@ const bookmarkList = (function(){
         })
     }
 
+
+    //HOW DO YOU GET VALUE OUT OF DROPDOWN?????
+    const handleFilterbyRating = function(){
+        $('.dropdown-item').click('value', (event) => {
+            let filterRating = event.currentTarget.val();
+            console.log(filterRating);
+        })
+    }
+
     const bindEventListeners = function(){
         handleAddBookmarkToggle();
         handleShowDetailToggle();
+        handleFilterbyRating();
         handleNewBookmarkSubmit();
         handleDeleteBookmarkClicked();
     }

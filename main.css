@@ -5,12 +5,11 @@
   h1 {
     text-align: center;
   }
-  #title {
+  #header-title {
       font-size: 80px;
   }
 
   header{
-      background-color: grey;
       padding: 10px;
       font-size: 50px;
   }
