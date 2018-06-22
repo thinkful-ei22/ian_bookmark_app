@@ -1,15 +1,12 @@
 * {
     box-sizing: border-box;
   }
-  
-
   h1 {
     text-align: center;
   }
   #header-title {
       font-size: 80px;
   }
-
   header{
       padding: 10px;
       font-size: 50px;
@@ -22,17 +19,14 @@
     background-color: lightgray;
     width: 100%;
     text-align: center;
-}
-
+  }
   #js-home-form {
       text-align: center;
   }
-
   #dropdown {
       height: 46.25px;
       border: solid, black, 5px
   }
-
   .js-bookmarks-list{
       padding-top: 15px;
       padding-bottom: 250px;
@@ -40,21 +34,16 @@
   .form-check{
     margin: 5px;
   }
-
   .js-adding{
       margin-bottom: 15px;
       margin-top: 15px;
-
   }
-
   .rating {
       font-size: 20px;
   }
-
   .li-description {
       margin-bottom: 15px;
   }
-
   .container {
     max-width: 650px;
     margin: 0 auto;

@@ -46,14 +46,12 @@ const bookmarkList = (function(){
     `;
 
     const generateBookmarkElement = function(bookmark){
-        
         if (bookmark.showDetail === false){
             let stars = [];
             for(let i = 1; i <= bookmark.rating; i++){
                 stars.push('<span class="glyphicon glyphicon-star" aria-hidden="true"></span>');
             }
             let starsJoined = stars.join("");
-
             return `
             <li class="li-result list-group-item" data-item-id="${bookmark.id}">
             <h3>${bookmark.title}</h3>
@@ -63,7 +61,6 @@ const bookmarkList = (function(){
           `
         }
         else {
-
             let radios = '';
             for(let i = 1; i <= 5; i++){
                 const checked = bookmark.rating === i ? 'checked': '';
@@ -74,7 +71,6 @@ const bookmarkList = (function(){
                 </span>
                 `
             }
-
             return `
             <li class="li-result list-group-item" data-item-id="${bookmark.id}">
             <form class="js-edit-item">
@@ -100,13 +96,13 @@ const bookmarkList = (function(){
                 <button class="btn btn-primary js-li-result remove" type="remove">Remove Bookmark</button>
             </form>
             </li>`
-        }
+        };
     };
 
     const generateBookmarksString = function(bookmarks){
         const bookmarkElements = bookmarks.map((bookmark) => generateBookmarkElement(bookmark));
         return bookmarkElements.join('');
-    }
+    };
 
     const render = function(){
         $('#adding-section').html('');
@@ -115,8 +111,8 @@ const bookmarkList = (function(){
         $('.js-bookmarks-list').html(bookmarksString);
         if(store.addingView === true){
             $('#adding-section').html(addingFormElement);
-        }
-    }
+        };
+    };
 
     const handleNewBookmarkSubmit = function(){
         $('#adding-section').submit(function(event){
@@ -144,7 +140,7 @@ const bookmarkList = (function(){
 
     const getBookmarkIdFromElement = function(bookmark){
         return $(bookmark).closest('.list-group-item').data('item-id');
-    }
+    };
 
     const handleDeleteBookmarkClicked = function(){
         $('.js-bookmarks-list').on('click', '.remove', (event) => {
@@ -164,7 +160,7 @@ const bookmarkList = (function(){
             render();
         });
         
-    }
+    };
 
     const handleShowDetailToggle = function(){
         $('.list-group').on('click', '.show-details', (event) => {
@@ -222,7 +218,7 @@ const bookmarkList = (function(){
             });
             });
             
-    }
+    };
 
     const bindEventListeners = function(){
         handleAddBookmarkToggle();
@@ -231,12 +227,12 @@ const bookmarkList = (function(){
         handleFilterbyRating();
         handleNewBookmarkSubmit();
         handleDeleteBookmarkClicked();
-    }
+    };
 
 
 
     return {
         generateBookmarkElement, generateBookmarksString, render, bindEventListeners
-    }
+    };
 
 }());

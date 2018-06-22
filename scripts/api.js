@@ -37,13 +37,13 @@ const api = (function(){
             method: 'DELETE',
             contentType: "application/json",
             success: callback
-        })
-    }
+        });
+    };
 
 
     return {
         getBookmarks, createBookmark, updateBookmark, deleteBookmark
-    }
+    };
 
 
-}())
+}());

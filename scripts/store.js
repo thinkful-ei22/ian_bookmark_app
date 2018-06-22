@@ -26,7 +26,7 @@ const store = (function(){
             }
         });
         bookmark.showDetail = false;
-    }
+    };
 
     const findAndDelete = function(id) {
         this.bookmarks = this.bookmarks.filter(bookmark => bookmark.id !== id);
@@ -39,6 +39,6 @@ const store = (function(){
     return {
         bookmarks, addingView, addBookmark, findById, findAndUpdate, findAndDelete,
         toggleAddingView, filterByRating
-    }
+    };
 
 }());
