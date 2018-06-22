@@ -28,7 +28,7 @@
 
   .js-adding{
       margin-bottom: 15px;
-      margin-top: 25px;
+      margin-top: 15px;
 
   }
 
@@ -40,24 +40,6 @@
       margin-bottom: 15px;
   }
 
-  body {
-    font-family: 'Roboto', sans-serif;
-    margin-left: auto;
-    margin-right: auto;
-  }
-  
-  button, input[type="text"] {
-    padding: 5px;
-  }
-  
-  button:hover {
-    cursor: pointer;
-  }
-  
-  .hidden {
-    display: none;
-  }
-  
   .container {
     max-width: 600px;
     margin: 0 auto;

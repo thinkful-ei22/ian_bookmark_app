@@ -177,30 +177,35 @@ const bookmarkList = (function(){
                     api.getBookmarks((updatedBookmarks) => {
                         console.log(updatedBookmarks);
                         store.findAndUpdate(id, newBookmark);
-                        //$('.bookmark-title').val(item.title);
-                        //$('.bookmark-url').val(item.url);
-                        //$('.bookmark-description').val(item.desc);
-                        //$('.bookmark-rating').val(item.rating);
                         render();
-                    })
-                    //store.addBookmark(updatedBookmark);
-                    //store.findAndUpdate(id, updatedBookmark);
-                    
+                    });
                 }),
                 () => {
                     alert("must enter all fields correctly!");
                 }
-            )
-            
-          })
+            );
+          });
     };
 
-    //HOW DO YOU GET VALUE OUT OF DROPDOWN?????
     const handleFilterbyRating = function(){
-        $('.dropdown-item').click('value', (event) => {
-            let filterRating = event.currentTarget.val();
-            console.log(filterRating);
-        })
+        $('.selectpicker').on('change', (event) => {
+            let filterRating = $(event.currentTarget).val();
+            store.bookmarks = [];
+            api.getBookmarks((responseItems) => {
+                responseItems.forEach((responseItem) => store.addBookmark(responseItem));
+                bookmarkList.render();
+                const filteredBookmarks = store.bookmarks.filter(bookmark => {
+                    if(bookmark.rating >= filterRating){
+                        return bookmark;
+                    }
+                    else{
+                    }    
+                });
+                store.bookmarks = filteredBookmarks;
+                render();
+            });
+            });
+            
     }
 
     const bindEventListeners = function(){

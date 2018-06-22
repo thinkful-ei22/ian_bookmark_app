@@ -25,9 +25,6 @@ const store = (function(){
                 return bookmark;
             }
         });
-        console.log(bookmark);
-        //bookmark = newbookmark;
-        console.log(bookmark, this.bookmarks);
         bookmark.showDetail = false;
     }
 
