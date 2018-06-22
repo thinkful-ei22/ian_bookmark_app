@@ -18,6 +18,10 @@
       text-align: center;
   }
 
+  #dropdown {
+      height: 46.25px;
+  }
+
   .js-bookmarks-list{
       padding-top: 15px;
       padding-bottom: 15px;
